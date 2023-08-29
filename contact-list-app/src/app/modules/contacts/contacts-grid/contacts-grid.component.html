@@ -1,0 +1,7 @@
+<mat-grid-list [cols]="columns">
+  <ng-container *ngFor="let item of contacts">
+    <mat-grid-tile>
+      <app-contact-card [name]="item.name" [photoUrl]="item.photoUrl"></app-contact-card>
+    </mat-grid-tile>
+  </ng-container>
+</mat-grid-list>

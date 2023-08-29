@@ -2,7 +2,7 @@ export interface ICreateContact {
   name: string;
   phone: string;
   bio: string;
-  photoUrl: string|null;
+  photoUrl?: string;
 }
 export interface IContact extends ICreateContact {
   _id: string;
