@@ -1,1 +1,6 @@
-<p>contacts-list works!</p>
+<mat-list>
+  <mat-list-item *ngFor="let item of data" appearance="outline">
+    <img matListItemAvatar src="./../../../../assets/avatar.png" height="40" style="border-radius: 50%" alt="...">
+    <h3 matListItemTitle>{{item.name}}</h3>
+  </mat-list-item>
+</mat-list>
