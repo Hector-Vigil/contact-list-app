@@ -4,10 +4,13 @@
 :root {
   --custom-purple: #d39df5;
   --custom-yellow: #fff7dc;
+  --custom-mustard: #f6ca00;
   --custom-gray: #b3b3b3;
+  --custom-dark-yellow: #d5a100;
 }
 
 body {
   margin: 0;
   background-color: var(--custom-yellow);
+  font-family: Arial, Helvetica, sans-serif;
 }

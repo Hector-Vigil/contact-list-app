@@ -1,3 +1,10 @@
 button {
   border-radius: 1rem;
+  border: var(--custom-dark-yellow) 1px solid;
+  background-color: var(--custom-mustard);
+}
+
+.large {
+  width: 10rem;
+  height: 2.5rem;
 }
