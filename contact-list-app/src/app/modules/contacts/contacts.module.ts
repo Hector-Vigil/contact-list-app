@@ -6,6 +6,7 @@ import { ContactsListComponent } from './contacts-list/contacts-list.component';
 import { MatListModule } from '@angular/material/list';
 import { ContactCardComponent } from './contact-card/contact-card.component';
 import { ContactsGridComponent } from './contacts-grid/contacts-grid.component';
+import { ContactsDirectoryComponent } from './contacts-directory/contacts-directory.component';
 
 
 @NgModule({
@@ -16,6 +17,7 @@ import { ContactsGridComponent } from './contacts-grid/contacts-grid.component';
     ContactsRoutingModule,
     ContactsListComponent,
     ContactsGridComponent,
+    ContactsDirectoryComponent,
     ContactCardComponent,
     MatListModule
   ]

@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import {NgFor} from '@angular/common';
 import {MatListModule} from '@angular/material/list';
+import { IContact } from 'src/app/interfaces/contact.interface';
 
 @Component({
   selector: 'app-contacts-list',
@@ -10,7 +11,7 @@ import {MatListModule} from '@angular/material/list';
   imports: [MatListModule,NgFor],
 })
 export class ContactsListComponent implements OnInit {
-  @Input() data!: any[];
+  @Input() contacts!: IContact[];
 
   constructor() { }
 

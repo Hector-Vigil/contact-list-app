@@ -10,7 +10,8 @@ import {MatCardModule} from '@angular/material/card';
 })
 export class ContactCardComponent implements OnInit {
   @Input() name: string = "John Doe";
-  @Input() photoUrl?: string = "./../../../../assets/avatar.png";
+  @Input() photoUrl?: string = "./assets/avatar.png";
+  customPhoto = "./assets/avatar.png";
 
   constructor() { }
 

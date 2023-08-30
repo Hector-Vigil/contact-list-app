@@ -1,6 +1,6 @@
-<mat-grid-list [cols]="columns">
+<mat-grid-list [cols]="columns" [rowHeight]="'200px'">
   <ng-container *ngFor="let item of contacts">
-    <mat-grid-tile>
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
       <app-contact-card [name]="item.name" [photoUrl]="item.photoUrl"></app-contact-card>
     </mat-grid-tile>
   </ng-container>

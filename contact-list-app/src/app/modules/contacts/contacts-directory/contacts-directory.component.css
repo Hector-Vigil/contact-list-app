@@ -1,0 +1,19 @@
+.container {
+  width: 100%;
+  height: auto;
+}
+
+.row {
+  width: 90vw;
+  padding: 0.5rem;
+  display: inline-block;
+  vertical-align: bottom;
+}
+
+.ml {
+  margin-left: 3rem;
+}
+
+.text-wrapper {
+  display: inline-block;
+}

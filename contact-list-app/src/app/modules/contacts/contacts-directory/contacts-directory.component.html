@@ -1,0 +1,17 @@
+<div class="container">
+  <div class="row">
+    <app-button [text]="gridEnabled?'List':'Grid'" (click)="changeView()"></app-button>
+  </div>
+  <div class="row ml">
+    <div class="text-wrapper">
+      <h1>Users</h1>
+    </div>
+    <app-input></app-input>
+  </div>
+  <div *ngIf="gridEnabled">
+    <app-contacts-grid [contacts]="[]"></app-contacts-grid>
+  </div>
+  <div *ngIf="!gridEnabled">
+    <app-contacts-list [contacts]="[]"></app-contacts-list>
+  </div>
+</div>

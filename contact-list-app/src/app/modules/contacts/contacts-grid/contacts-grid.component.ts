@@ -19,6 +19,6 @@ export class ContactsGridComponent implements OnInit {
 
 
   constructor() { }
-  ngOnInit() {}
+  ngOnInit() { }
 
 }

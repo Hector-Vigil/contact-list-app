@@ -4,4 +4,10 @@
 :root {
   --custom-purple: #d39df5;
   --custom-yellow: #fff7dc;
+  --custom-gray: #b3b3b3;
+}
+
+body {
+  margin: 0;
+  background-color: var(--custom-yellow);
 }

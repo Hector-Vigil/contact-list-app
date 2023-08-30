@@ -1,10 +1,15 @@
 .full-width {
-  width: 90%;
-  margin-inline: 2rem;
+  width: 75vw;
+  min-width: 80%;
+  margin-left: 2rem;
   border-radius: 1.5rem;
-  background-color: gray;
+  background-color: var(--custom-gray);
   padding-left: 2rem;
   max-height: 4rem;
+  vertical-align: super;
+}
+::ng-deep .mat-form-field-appearance-legacy .mat-form-field-wrapper {
+  padding-bottom: 0.8rem;
 }
 
 ::ng-deep .mat-form-field-underline {
@@ -24,6 +29,10 @@
 ::ng-deep.mat-form-field-ripple {
  /*change color of underline when focused*/
  background-color: black !important;
+}
+
+input {
+  width: 100%;
 }
 
 /* input,
