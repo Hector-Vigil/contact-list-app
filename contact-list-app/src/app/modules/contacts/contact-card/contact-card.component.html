@@ -1,6 +1,6 @@
 <mat-card>
   <mat-card-content>
-    <img mat-card-sm-image [src]="photoUrl??customPhoto" [alt]="'profile picture'">
+    <img mat-card-sm-image [src]="!!photoUrl?photoUrl:customPhoto" [alt]="'profile picture'">
     <mat-card-title>{{name}}</mat-card-title>
   </mat-card-content>
 </mat-card>

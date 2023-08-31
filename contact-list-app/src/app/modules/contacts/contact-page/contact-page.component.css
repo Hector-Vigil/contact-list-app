@@ -2,9 +2,12 @@
   margin: 2rem;
   display: flex;
 }
+.wrap {
+  flex-wrap: wrap;
+}
 
 .flex-column {
-  margin: 2rem;
+  margin-bottom: 2rem;
   margin-top: 0;
   flex: 1;
   display: flex;
@@ -18,7 +21,7 @@
 }
 
 .flex-row {
-  margin: 2rem;
+  margin-bottom: 2rem;
   margin-top: 0;
   flex: 1;
   display: flex;
@@ -31,6 +34,10 @@
 
 .ml {
   margin-left: 2rem;
+}
+
+.mr {
+  margin-right: 2rem;
 }
 
 .ml-0 {

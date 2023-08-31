@@ -1,6 +1,7 @@
 .container {
   width: 100%;
   height: auto;
+  overflow-x: hidden;
 }
 
 .row {
@@ -16,4 +17,5 @@
 
 .text-wrapper {
   display: inline-block;
+  margin-right: 2rem;
 }

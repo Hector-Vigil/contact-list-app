@@ -1,7 +1,6 @@
 .full-width {
   width: 75vw;
   min-width: 80%;
-  margin-left: 2rem;
   border-radius: 1.5rem;
   background-color: var(--custom-gray);
   padding-left: 2rem;

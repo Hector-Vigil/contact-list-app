@@ -7,6 +7,8 @@ import { ContactValidator } from 'src/app/validators/contact.validator';
 import { EditableComponent } from 'src/app/shared/editable/editable.component';
 import { CommonModule } from '@angular/common';
 import { MatTooltipModule } from '@angular/material';
+import { catchError, throwError } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-contact-page',
@@ -30,6 +32,7 @@ export class ContactPageComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private contactService: ContactService,
+    private router: Router
   ) {
     if(!!window.history.state.id)
       this.id = window.history.state.id;
@@ -44,7 +47,6 @@ export class ContactPageComponent implements OnInit {
   }
 
   updateFB(){
-    console.log('here url',this.contact);
     this.contactForm = this.fb.group({
       name: [this.contact.name, Validators.required],
       phone: [
@@ -72,10 +74,7 @@ export class ContactPageComponent implements OnInit {
     const formData = new FormData();
     formData.append("image",files[0]);
     this.contactService.uploadImage(formData).subscribe((res:{photoUrl:string})=>{
-      // this.contact = {...this.contact,photoUrl:res.url};
       this.contact.photoUrl = res.photoUrl;
-      console.log('here url',res.photoUrl);
-      console.log('here this contact',this.contact);
       this.updateFB();
     })
   }
@@ -91,18 +90,53 @@ export class ContactPageComponent implements OnInit {
     }
   }
 
+  alertMethod(value: string) {
+    if(confirm(value)) {
+    }
+  }
+
+  deleteContact() {
+    this.contactService.removeItem(this.id as string)
+    .subscribe(()=>this.router.navigate(['/contacts/list']));
+  }
+
   handleOnSubmit() {
     if (!this.contactForm.valid) return;
     Object.assign(this.contact, this.contactForm.value);
     if(!this.id){
       this.contactService
-        .updateItem((this.contact as IContact).id,this.contact as IContact)
-        .subscribe(() => {
+        .newItem(this.contact as ICreateContact)
+        .pipe(
+          catchError((e) => {
+            return throwError(() => {
+              if(e.error.fields[0] === "phone")
+                this.alertMethod('This phone number already exists');
+              else if(e.error.fields[0] === "bio")
+                this.alertMethod('Biography should be longer than 5 chars');
+              return new Error(`ups something happened ${JSON.stringify(e.error)}`)
+            });
+          })
+        )
+        .subscribe((contact) => {
           this.editing = false;
+          this.contact = contact;
+          this.id = contact.id;
+          this.router.navigate([`/contact/${contact.id}`],{ state:{id:contact.id}})
         });
     } else {
       this.contactService
         .updateItem((this.contact as IContact).id,this.contact as IContact)
+        .pipe(
+          catchError((e) => {
+            return throwError(() => {
+              if(e.error.fields[0] === "phone")
+                this.alertMethod('This phone number already exists');
+              else if(e.error.fields[0] === "bio")
+                this.alertMethod('Biography should be longer than 5 chars');
+              return new Error(`ups something happened ${JSON.stringify(e.error)}`)
+            });
+          })
+        )
         .subscribe(() => {
           this.editing = false;
         });

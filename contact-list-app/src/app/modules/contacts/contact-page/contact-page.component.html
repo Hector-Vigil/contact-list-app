@@ -2,11 +2,11 @@
   <div class="abs">
     <app-button [text]="'Basic Information'"></app-button>
   </div>
-  <div class="flex-row mt bottom-border">
-    <div class="flex-column f01 ml-0">
+  <div class="flex-row mt bottom-border wrap">
+    <div class="flex-column f01 ml-0 mr">
         <img
-          matTooltip="Click to upload photo"
-         class="layer" [src]="contact.photoUrl?contact.photoUrl:'./assets/avatar.png'" height="350px" (click)="editing?fileUpload.click():null">
+          [matTooltip]="editing?'Click to upload photo':''"
+         class="layer" [src]="contact.photoUrl?contact.photoUrl:'./assets/avatar.png'" width="300px" (click)="editing?fileUpload.click():null">
       <input type="file" class="file-upload" accept="image/png, image/gif, image/jpeg" (change)="handleImageUpload($event)" #fileUpload >
     </div>
     <div class="flex-column f2 mr-0">
@@ -20,8 +20,8 @@
         <div class="mi-1">
           <app-button [class]="'large'" (click)="editHandle()" [text]="editing?'Save':'Edit'"></app-button>
         </div>
-        <div class="mi-1">
-          <app-button [class]="'large'" [text]="'Delete'"></app-button>
+        <div *ngIf="!!id" class="mi-1">
+          <app-button [class]="'large'" (click)="deleteContact()" [text]="'Delete'"></app-button>
         </div>
       </div>
     </div>
