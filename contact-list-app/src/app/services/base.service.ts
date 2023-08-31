@@ -36,4 +36,7 @@ export abstract class BaseService<TEntity,TCreate>
   removeItem(id: string): Observable<void> {
     return this.http.delete<void>(`${this.baseEndPoint}/${id}`);
   }
+  uploadImage(item: FormData): Observable<{photoUrl:string}> {
+    return this.http.post<{photoUrl:string}>(`${this.baseEndPoint}/uploadImage`,item)
+  }
 }

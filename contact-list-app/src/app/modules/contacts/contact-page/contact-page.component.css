@@ -94,5 +94,7 @@ p {
   line-height: 22px;
 }
 
-
+input {
+  display: none;
+}
 

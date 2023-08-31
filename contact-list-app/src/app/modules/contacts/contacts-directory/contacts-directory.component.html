@@ -6,10 +6,10 @@
     <div class="text-wrapper">
       <h1>Users</h1>
     </div>
-    <app-input></app-input>
+    <app-input [handleSearch]="handleOnSearch"></app-input>
   </div>
   <div class="row ml">
-    <app-button [text]="'Add Contact'" [class]="'large'" (click)="handleAddContactClick()"></app-button>
+    <app-button [text]="'Add Contact'" [icon]="true" [class]="'large'" (click)="handleAddContactClick()"></app-button>
   </div>
 
   <div *ngIf="gridEnabled">

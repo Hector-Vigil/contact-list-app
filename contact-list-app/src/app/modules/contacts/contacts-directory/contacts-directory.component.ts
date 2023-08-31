@@ -41,8 +41,10 @@ export class ContactsDirectoryComponent implements OnInit {
     this.router.navigate([`/contact/create`])
   }
 
-  handleOnSearch(queries: string[]) {
-    this.updateContacts(queries);
+  handleOnSearch = (query: string[]) => {
+    this.contactService.getItems(query).subscribe((contacts) => {
+      this.contacts = contacts;
+    });
   }
 
   changeView():void {

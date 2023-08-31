@@ -6,13 +6,14 @@ import { ContactService } from 'src/app/services/contact.service';
 import { ContactValidator } from 'src/app/validators/contact.validator';
 import { EditableComponent } from 'src/app/shared/editable/editable.component';
 import { CommonModule } from '@angular/common';
+import { MatTooltipModule } from '@angular/material';
 
 @Component({
   selector: 'app-contact-page',
   templateUrl: './contact-page.component.html',
   styleUrls: ['./contact-page.component.css'],
   standalone: true,
-  imports:[ButtonComponent, EditableComponent, CommonModule, ReactiveFormsModule]
+  imports:[ButtonComponent, EditableComponent, CommonModule, ReactiveFormsModule, MatTooltipModule]
 })
 export class ContactPageComponent implements OnInit {
   contactForm!: FormGroup;
@@ -22,8 +23,7 @@ export class ContactPageComponent implements OnInit {
     bio:"",
     photoUrl:""
   };
-  isCreating: boolean = true;
-  editing: boolean = this.isCreating;
+  editing: boolean = true;
   id:string|undefined;
 
 
@@ -33,6 +33,8 @@ export class ContactPageComponent implements OnInit {
   ) {
     if(!!window.history.state.id)
       this.id = window.history.state.id;
+    else if(window.location.pathname.length === 45)
+      this.id = window.location.pathname.substring(9);
   }
 
   ngOnInit(): void {
@@ -42,6 +44,7 @@ export class ContactPageComponent implements OnInit {
   }
 
   updateFB(){
+    console.log('here url',this.contact);
     this.contactForm = this.fb.group({
       name: [this.contact.name, Validators.required],
       phone: [
@@ -52,14 +55,29 @@ export class ContactPageComponent implements OnInit {
         this.contact.bio,
         [Validators.required],
       ],
+      photoUrl:[this.contact.photoUrl]
     });
   }
 
   getContact() {
     this.contactService.getItemId(this.id as string).subscribe((contact) => {
       this.contact = contact;
+      this.editing = false;
       this.updateFB();
     });
+  }
+
+  handleImageUpload = (event:Event) =>{
+    const files = (event.target as any).files;
+    const formData = new FormData();
+    formData.append("image",files[0]);
+    this.contactService.uploadImage(formData).subscribe((res:{photoUrl:string})=>{
+      // this.contact = {...this.contact,photoUrl:res.url};
+      this.contact.photoUrl = res.photoUrl;
+      console.log('here url',res.photoUrl);
+      console.log('here this contact',this.contact);
+      this.updateFB();
+    })
   }
 
   phoneNumberSeparator(phone:string){

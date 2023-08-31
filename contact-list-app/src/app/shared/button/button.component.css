@@ -8,3 +8,8 @@ button {
   width: 10rem;
   height: 2.5rem;
 }
+
+mat-icon {
+  margin-bottom: 4px;
+  margin-right: 10px;
+}
