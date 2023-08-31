@@ -1,4 +1,4 @@
-<div class="container flex-column mt">
+<form [formGroup]="contactForm" class="container flex-column mt">
   <div class="abs">
     <app-button [text]="'Basic Information'"></app-button>
   </div>
@@ -9,13 +9,13 @@
     <div class="flex-column f2 mr-0">
       <div class="flex-row">
         <div class="flex-column">
-          <h1>John Doe</h1>
-          <h3>{{phoneNumberSeparator("1231231234")}}</h3>
+          <app-editable [isEditing]="editing" [class]="'h1'" formControlName="name"  [label]="'name'"></app-editable>
+          <app-editable [isEditing]="editing" [class]="'h3'" formControlName="phone"  [label]="'phone'"></app-editable>
         </div>
       </div>
       <div class="flex-row text-align-end mr-0">
         <div class="mi-1">
-          <app-button [class]="'large'" [text]="'Edit'"></app-button>
+          <app-button [class]="'large'" (click)="editHandle()" [text]="editing?'Save':'Edit'"></app-button>
         </div>
         <div class="mi-1">
           <app-button [class]="'large'" [text]="'Delete'"></app-button>
@@ -27,6 +27,6 @@
     <h2>Bio</h2>
   </div>
   <div class="flex-row">
-    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsu</p>
+    <app-editable [isEditing]="editing" [class]="'p'" formControlName="bio" [large]="true" [label]="'bio'"></app-editable>
   </div>
-</div>
+</form>

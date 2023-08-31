@@ -1,0 +1,15 @@
+<div *ngIf="isEditing" [class]="large?'large':''">
+  <mat-form-field [class]="large?'large':''">
+    <mat-label>{{label}}</mat-label>
+    <div *ngIf="large">
+      <textarea (input)="changeValue(input.value)" [value]="value" #input matInput rows="5" cols="50"></textarea>
+    </div>
+    <div *ngIf="!large">
+      <input (input)="changeValue(input.value)" [value]="value" #input matInput />
+    </div>
+  </mat-form-field>
+
+</div>
+<div *ngIf="!isEditing">
+  <p [class]="class">{{value}}</p>
+</div>

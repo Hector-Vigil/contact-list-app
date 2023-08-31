@@ -5,5 +5,5 @@ export interface ICreateContact {
   photoUrl?: string;
 }
 export interface IContact extends ICreateContact {
-  _id: string;
+  id: string;
 }

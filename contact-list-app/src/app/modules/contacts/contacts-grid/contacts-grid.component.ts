@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { NgFor } from '@angular/common';
 import { ContactCardComponent } from '../contact-card/contact-card.component';
-import { IContact } from "./../../../interfaces/contact.interface";
+import { Contact } from 'src/app/models/contact.model';
 
 @Component({
   selector: 'app-contacts-grid',
@@ -14,7 +14,8 @@ import { IContact } from "./../../../interfaces/contact.interface";
 
 
 export class ContactsGridComponent implements OnInit {
-  @Input() contacts!: IContact[];
+  @Input() contacts!: Contact[];
+  @Input() handleContactClick!: Function;
   columns: number = 4;
 
 

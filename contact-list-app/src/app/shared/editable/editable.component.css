@@ -1,0 +1,54 @@
+::ng-deep .mat-focused .mat-form-field-label {
+  /*change color of label*/
+  color: black !important;
+ }
+
+ ::ng-deep.mat-form-field-underline {
+  /*change color of underline*/
+  background-color: black !important;
+}
+
+::ng-deep.mat-form-field-ripple {
+ /*change color of underline when focused*/
+ background-color: black !important;
+}
+
+input {
+  width: 100%;
+}
+
+::ng-deep .mat-form-field-underline {
+  display: none;
+}
+
+
+textarea {
+  min-width: 90vw;
+}
+
+input,
+textarea,
+[contenteditable] {
+  caret-color: black;
+}
+
+.h1 {
+  margin-block-end: 0;
+  font-size: 2.5em;
+  font-weight: bold;
+  margin-block-start: 0.5em;
+}
+
+.h3 {
+  margin-block-end: 0.5rem;
+  font-size: 1.5em;
+  margin-block-start: 0.5em;
+}
+
+.p {
+  letter-spacing: 0.3px;
+  line-height: 22px;
+  margin-block-start: 0.5em;
+}
+
+

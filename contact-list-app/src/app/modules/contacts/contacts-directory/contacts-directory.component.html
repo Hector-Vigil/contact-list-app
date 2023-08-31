@@ -8,10 +8,14 @@
     </div>
     <app-input></app-input>
   </div>
+  <div class="row ml">
+    <app-button [text]="'Add Contact'" [class]="'large'" (click)="handleAddContactClick()"></app-button>
+  </div>
+
   <div *ngIf="gridEnabled">
-    <app-contacts-grid [contacts]="[]"></app-contacts-grid>
+    <app-contacts-grid [handleContactClick]="handleContactClick" [contacts]="contacts"></app-contacts-grid>
   </div>
   <div *ngIf="!gridEnabled">
-    <app-contacts-list [contacts]="[]"></app-contacts-list>
+    <app-contacts-list [contacts]="contacts"></app-contacts-list>
   </div>
 </div>
