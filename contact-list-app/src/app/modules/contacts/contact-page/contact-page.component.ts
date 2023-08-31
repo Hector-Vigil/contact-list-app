@@ -10,6 +10,7 @@ import { CommonModule } from '@angular/common';
 import { MatTooltipModule } from '@angular/material';
 import { catchError, throwError } from 'rxjs';
 import { Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-contact-page',
@@ -27,23 +28,23 @@ export class ContactPageComponent implements OnInit {
     photoUrl:""
   };
   editing: boolean = true;
-  id:string|undefined;
+  id:string|null;
 
 
   constructor(
     private fb: FormBuilder,
     private contactService: ContactService,
     private imageService: ImageService,
-    private router: Router
+    private router: Router,
+    activatedRoute: ActivatedRoute
   ) {
-    if(!!window.history.state.id)
-      this.id = window.history.state.id;
-    else if(window.location.pathname.length === 45)
+    this.id = activatedRoute.snapshot.paramMap.get('id')
+     if(!this.id)
       this.id = window.location.pathname.substring(9);
   }
 
   ngOnInit(): void {
-    if(!!this.id)
+    if(!!this.id && this.id.length === 36)
       this.getContact()
     this.updateFB();
   }
@@ -111,43 +112,43 @@ export class ContactPageComponent implements OnInit {
   handleOnSubmit() {
     if (!this.contactForm.valid) return;
     Object.assign(this.contact, this.contactForm.value);
-    if(!this.id){
+    if(!!this.id && this.id.length === 36){
       this.contactService
-        .newItem(this.contact as ICreateContact)
-        .pipe(
-          catchError((e) => {
-            return throwError(() => {
-              if(e.error.fields[0] === "phone")
-                this.alertMethod('This phone number already exists');
-              else if(e.error.fields[0] === "bio")
-                this.alertMethod('Biography should be longer than 5 chars');
-              return new Error(`ups something happened ${JSON.stringify(e.error)}`)
-            });
-          })
-        )
-        .subscribe((contact) => {
-          this.editing = false;
-          this.contact = contact;
-          this.id = contact.id;
-          this.router.navigate([`/contact/${contact.id}`],{ state:{id:contact.id}})
-        });
+      .updateItem((this.contact as IContact).id,this.contact as IContact)
+      .pipe(
+        catchError((e) => {
+          return throwError(() => {
+            if(e.error.fields[0] === "phone")
+              this.alertMethod('This phone number already exists');
+            else if(e.error.fields[0] === "bio")
+              this.alertMethod('Biography should be longer than 5 chars');
+            return new Error(`ups something happened ${JSON.stringify(e.error)}`)
+          });
+        })
+      )
+      .subscribe(() => {
+        this.editing = false;
+      });
     } else {
       this.contactService
-        .updateItem((this.contact as IContact).id,this.contact as IContact)
-        .pipe(
-          catchError((e) => {
-            return throwError(() => {
-              if(e.error.fields[0] === "phone")
-                this.alertMethod('This phone number already exists');
-              else if(e.error.fields[0] === "bio")
-                this.alertMethod('Biography should be longer than 5 chars');
-              return new Error(`ups something happened ${JSON.stringify(e.error)}`)
-            });
-          })
-        )
-        .subscribe(() => {
-          this.editing = false;
-        });
+      .newItem(this.contact as ICreateContact)
+      .pipe(
+        catchError((e) => {
+          return throwError(() => {
+            if(e.error.fields[0] === "phone")
+              this.alertMethod('This phone number already exists');
+            else if(e.error.fields[0] === "bio")
+              this.alertMethod('Biography should be longer than 5 chars');
+            return new Error(`ups something happened ${JSON.stringify(e.error)}`)
+          });
+        })
+      )
+      .subscribe((contact) => {
+        this.editing = false;
+        this.contact = contact;
+        this.id = contact.id;
+        this.router.navigate([`/contact/${contact.id}`],{ state:{id:contact.id}})
+      });
     }
   }
 

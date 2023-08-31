@@ -1,5 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterTestingModule } from "@angular/router/testing";
 import { ContactPageComponent } from './contact-page.component';
 
 describe('ContactPageComponent', () => {
@@ -8,7 +10,7 @@ describe('ContactPageComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ContactPageComponent ]
+      imports: [ ContactPageComponent, HttpClientTestingModule, BrowserAnimationsModule, RouterTestingModule ]
     })
     .compileComponents();
 
