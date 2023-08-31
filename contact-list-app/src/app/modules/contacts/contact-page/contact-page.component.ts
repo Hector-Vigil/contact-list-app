@@ -3,6 +3,7 @@ import { IContact, ICreateContact } from 'src/app/interfaces/contact.interface';
 import { FormGroup, FormBuilder, Validators,ReactiveFormsModule } from '@angular/forms';
 import { ButtonComponent } from 'src/app/shared/button/button.component';
 import { ContactService } from 'src/app/services/contact.service';
+import { ImageService } from 'src/app/services/image.service';
 import { ContactValidator } from 'src/app/validators/contact.validator';
 import { EditableComponent } from 'src/app/shared/editable/editable.component';
 import { CommonModule } from '@angular/common';
@@ -32,6 +33,7 @@ export class ContactPageComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private contactService: ContactService,
+    private imageService: ImageService,
     private router: Router
   ) {
     if(!!window.history.state.id)
@@ -77,7 +79,7 @@ export class ContactPageComponent implements OnInit {
     const files = (event.target as any).files;
     const formData = new FormData();
     formData.append("image",files[0]);
-    this.contactService.uploadImage(formData)
+    this.imageService.newItem(formData)
     .subscribe((res:{photoUrl:string})=>{
       Object.assign(this.contact, this.contactForm.value);
       this.contact.photoUrl = res.photoUrl;
