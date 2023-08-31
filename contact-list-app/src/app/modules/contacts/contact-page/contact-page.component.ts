@@ -46,6 +46,10 @@ export class ContactPageComponent implements OnInit {
     this.updateFB();
   }
 
+  backToList = () => {
+    this.router.navigate(['/contacts/list'])
+  }
+
   updateFB(){
     this.contactForm = this.fb.group({
       name: [this.contact.name, Validators.required],
@@ -55,7 +59,7 @@ export class ContactPageComponent implements OnInit {
       ],
       bio: [
         this.contact.bio,
-        [Validators.required],
+        [Validators.required,ContactValidator.bioValidator],
       ],
       photoUrl:[this.contact.photoUrl]
     });
@@ -73,7 +77,9 @@ export class ContactPageComponent implements OnInit {
     const files = (event.target as any).files;
     const formData = new FormData();
     formData.append("image",files[0]);
-    this.contactService.uploadImage(formData).subscribe((res:{photoUrl:string})=>{
+    this.contactService.uploadImage(formData)
+    .subscribe((res:{photoUrl:string})=>{
+      Object.assign(this.contact, this.contactForm.value);
       this.contact.photoUrl = res.photoUrl;
       this.updateFB();
     })

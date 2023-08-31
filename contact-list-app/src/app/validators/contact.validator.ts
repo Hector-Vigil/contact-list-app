@@ -13,4 +13,14 @@ export class ContactValidator {
 
     return null;
   }
+  static bioValidator(control: AbstractControl) {
+    const invalidError = { invalidBio: true };
+
+    const value: string = control.value;
+
+    if (!value || value.length < 5)
+      return invalidError;
+
+    return null;
+  }
 }

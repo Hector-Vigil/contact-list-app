@@ -11,6 +11,13 @@
   vertical-align: bottom;
 }
 
+.center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
 .ml {
   margin-left: 3rem;
 }

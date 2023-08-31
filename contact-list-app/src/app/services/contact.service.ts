@@ -13,10 +13,11 @@ export class ContactService extends BaseService<Contact, ICreateContact> {
     super('/contacts', http);
   }
 
-  override getItems(query: string[]=[]): Observable<Contact[]> {
+  override getItems(limit:string[]=[],query: string[]=[]): Observable<Contact[]> {
     return this.http.get<Contact[]>(`${this.baseEndPoint}`, {
       params: {
-        query: query,
+        limit: limit,
+        query: query
       },
     });
 }

@@ -12,10 +12,10 @@
     <app-button [text]="'Add Contact'" [icon]="true" [class]="'large'" (click)="handleAddContactClick()"></app-button>
   </div>
 
-  <div *ngIf="gridEnabled">
+  <div>
     <app-contacts-grid [handleContactClick]="handleContactClick" [contacts]="contacts"></app-contacts-grid>
   </div>
-  <div *ngIf="!gridEnabled">
-    <app-contacts-list [contacts]="contacts"></app-contacts-list>
+  <div *ngIf="moreNotLoaded" class="row center">
+    <app-button [text]="'Load More'" [class]="'large'" (click)="handleLoadMoreContacts()"></app-button>
   </div>
 </div>

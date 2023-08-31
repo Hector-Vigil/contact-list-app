@@ -1,4 +1,7 @@
 <form [formGroup]="contactForm" class="container flex-column mt">
+  <div class="abs-left">
+    <app-button [text]="'Back'" (click)="backToList()"></app-button>
+  </div>
   <div class="abs">
     <app-button [text]="'Basic Information'"></app-button>
   </div>

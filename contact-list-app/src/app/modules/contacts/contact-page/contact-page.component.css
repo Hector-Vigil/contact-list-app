@@ -16,8 +16,19 @@
 
 .abs {
   position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  text-align: center;
+  top: 0;
+}
+
+.abs-left {
+  position: absolute;
   left: 0;
   top: 0;
+  z-index: 1;
 }
 
 .flex-row {

@@ -19,6 +19,8 @@ import { Router } from '@angular/router';
 export class ContactsDirectoryComponent implements OnInit {
   contacts: Contact[] = [];
   gridEnabled: boolean = true;
+  moreNotLoaded: boolean = true;
+  searchQuery: string[] = [];
 
 
   constructor(private contactService: ContactService,private router: Router) {}
@@ -27,8 +29,8 @@ export class ContactsDirectoryComponent implements OnInit {
     this.updateContacts();
   }
 
-  updateContacts(queries: string[] = []) {
-    this.contactService.getItems().subscribe((contacts) => {
+  updateContacts(limit:string[]=['12'],queries: string[] = []) {
+    this.contactService.getItems(limit).subscribe((contacts) => {
       this.contacts = contacts;
     });
   }
@@ -41,10 +43,18 @@ export class ContactsDirectoryComponent implements OnInit {
     this.router.navigate([`/contact/create`])
   }
 
-  handleOnSearch = (query: string[]) => {
-    this.contactService.getItems(query).subscribe((contacts) => {
+  handleOnSearch = (query: string[]=[],limit:string[]=['12'],) => {
+    this.searchQuery = query;
+    this.contactService.getItems(this.moreNotLoaded?limit:[],query).subscribe((contacts) => {
       this.contacts = contacts;
     });
+  }
+
+  handleLoadMoreContacts = (limit:string[]=['12']) => {
+    this.contactService.getItems(this.moreNotLoaded?[]:limit,this.searchQuery).subscribe((contacts) => {
+      this.contacts = contacts;
+    });
+    this.moreNotLoaded = false;
   }
 
   changeView():void {
