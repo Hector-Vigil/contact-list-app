@@ -45,7 +45,7 @@ export class ContactPageComponent implements OnInit {
 
   ngOnInit(): void {
     if(!!this.id && this.id.length === 36)
-      this.getContact()
+      this.getContact(this.id as string)
     this.updateFB();
   }
 
@@ -68,8 +68,8 @@ export class ContactPageComponent implements OnInit {
     });
   }
 
-  getContact() {
-    this.contactService.getItemId(this.id as string).subscribe((contact) => {
+  getContact(id:string) {
+    this.contactService.getItemId(id).subscribe((contact) => {
       this.contact = contact;
       this.editing = false;
       this.updateFB();

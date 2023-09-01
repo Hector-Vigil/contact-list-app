@@ -10,7 +10,7 @@ import { BaseService } from './base.service';
 })
 export class ImageService extends BaseService<{photoUrl:string}, FormData> {
   constructor(override http: HttpClient) {
-    super('/contacts/imageUpload', http);
+    super('/contacts/uploadImage', http);
   }
 
 }

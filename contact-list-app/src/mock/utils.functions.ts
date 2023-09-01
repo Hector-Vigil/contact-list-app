@@ -18,3 +18,13 @@ export function randomUUID() {
       return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
   });
 }
+
+
+export function updateFormControls(
+  contact: Contact,
+  controls: { [key: string]: any }
+) {
+  for (const key in controls) {
+    controls[key].setValue((contact as any)[key]);
+  }
+}

@@ -23,7 +23,7 @@
         <div class="mi-1">
           <app-button [class]="'large'" (click)="editHandle()" [text]="editing?'Save':'Edit'"></app-button>
         </div>
-        <div *ngIf="!!id" class="mi-1">
+        <div *ngIf="!!id && id.length===36" class="mi-1">
           <app-button [class]="'large'" (click)="deleteContact()" [text]="'Delete'"></app-button>
         </div>
       </div>
